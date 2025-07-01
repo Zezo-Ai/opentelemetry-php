@@ -32,6 +32,9 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(SpanConverter::class)]
 class SpanConverterTest extends TestCase
 {
+    /**
+     * @psalm-suppress InvalidArgument
+     */
     public function test_convert_span_to_payload(): void
     {
         $context = SpanContext::getInvalid();
@@ -309,6 +312,9 @@ class SpanConverterTest extends TestCase
         $this->assertCount(2, $result[0]->getResource()->getAttributes());
     }
 
+    /**
+     * @psalm-suppress InvalidArgument
+     */
     public function test_multiple_resources_result_in_multiple_resource_spans(): void
     {
         $resourceA = ResourceInfo::create(Attributes::create(['foo' => 'bar']));
@@ -321,6 +327,9 @@ class SpanConverterTest extends TestCase
         $this->assertCount(2, $result);
     }
 
+    /**
+     * @psalm-suppress InvalidArgument
+     */
     public function test_otlp_no_spans(): void
     {
         $this->assertCount(0, (new SpanConverter())->convert([])->getResourceSpans());
